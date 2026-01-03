@@ -25,7 +25,7 @@ export default function SobreFragments() {
     window.matchMedia("(max-width: 767px)").matches;
 
   /* =========================
-     SCROLL COM INÉRCIA (DESKTOP)
+     SCROLL ARTIFICIAL — DESKTOP
      ========================= */
   useEffect(() => {
     if (isMobile) return;
@@ -45,9 +45,6 @@ export default function SobreFragments() {
     return () => window.removeEventListener("wheel", onWheel);
   }, [isMobile]);
 
-  /* =========================
-     LOOP DE ANIMAÇÃO (DESKTOP)
-     ========================= */
   useEffect(() => {
     if (isMobile) return;
 
@@ -106,7 +103,8 @@ export default function SobreFragments() {
           ${isMobile ? "overflow-y-auto" : "overflow-hidden"}
         `}
         style={{
-          height: isMobile ? "auto" : "15.5rem",
+          maxHeight: isMobile ? "58vh" : "15.5rem",
+          WebkitOverflowScrolling: "touch",
           maskImage:
             "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
           WebkitMaskImage:
@@ -121,8 +119,8 @@ export default function SobreFragments() {
             transition: isMobile
               ? "none"
               : "transform 800ms cubic-bezier(0.16, 1, 0.3, 1)",
-            paddingTop: "4rem",
-            paddingBottom: "4rem",
+            paddingTop: "3.5rem",
+            paddingBottom: "3.5rem",
           }}
         >
           {fragments.map((text, i) => (
@@ -140,9 +138,9 @@ export default function SobreFragments() {
       {/* ENCERRAMENTO */}
       <div
         className={`
-          mt-10
+          mt-8
           transition-opacity duration-500 ease-out
-          ${isMobile || isFinished ? "opacity-60" : "opacity-0 pointer-events-none"}
+          ${isFinished || isMobile ? "opacity-60" : "opacity-0 pointer-events-none"}
         `}
       >
         <button
