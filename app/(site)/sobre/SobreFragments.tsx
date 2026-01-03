@@ -20,10 +20,16 @@ export default function SobreFragments() {
   const DAMPING = 0.88;
   const MAX_VELOCITY = 36;
 
+  const isMobile =
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 767px)").matches;
+
   /* =========================
-     SCROLL COM INÉRCIA SUAVE
+     SCROLL COM INÉRCIA (DESKTOP)
      ========================= */
   useEffect(() => {
+    if (isMobile) return;
+
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
 
@@ -37,12 +43,14 @@ export default function SobreFragments() {
 
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
-  }, []);
+  }, [isMobile]);
 
   /* =========================
-     LOOP DE ANIMAÇÃO (APPLE-LIKE)
+     LOOP DE ANIMAÇÃO (DESKTOP)
      ========================= */
   useEffect(() => {
+    if (isMobile) return;
+
     let raf: number;
 
     const animate = () => {
@@ -60,7 +68,6 @@ export default function SobreFragments() {
 
         const clamped = Math.min(Math.max(next, 0), maxOffset);
 
-        // DETECÇÃO DE FIM COM DELAY DE 1s
         if (clamped >= maxOffset - 2) {
           if (!finishTimeoutRef.current) {
             finishTimeoutRef.current = setTimeout(() => {
@@ -84,33 +91,36 @@ export default function SobreFragments() {
     raf = requestAnimationFrame(animate);
 
     return () => {
-      if (finishTimeoutRef.current) {
-        clearTimeout(finishTimeoutRef.current);
-      }
+      if (finishTimeoutRef.current) clearTimeout(finishTimeoutRef.current);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="w-full flex flex-col items-center">
       {/* ÁREA DE LEITURA */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden text-center"
+        className={`
+          relative w-full text-center
+          ${isMobile ? "overflow-y-auto" : "overflow-hidden"}
+        `}
         style={{
-          height: "15.5rem",
+          height: isMobile ? "auto" : "15.5rem",
           maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%)",
+            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
         }}
       >
         <div
           ref={contentRef}
           className="soft-text"
           style={{
-            transform: `translateY(-${offset}px)`,
-            transition: "transform 800ms cubic-bezier(0.16, 1, 0.3, 1)",
+            transform: isMobile ? "none" : `translateY(-${offset}px)`,
+            transition: isMobile
+              ? "none"
+              : "transform 800ms cubic-bezier(0.16, 1, 0.3, 1)",
             paddingTop: "4rem",
             paddingBottom: "4rem",
           }}
@@ -119,11 +129,7 @@ export default function SobreFragments() {
             <p
               key={i}
               className="text-base leading-relaxed opacity-85 mb-6"
-              style={{
-                letterSpacing: "0.015em",
-                transition:
-                  "opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
-              }}
+              style={{ letterSpacing: "0.015em" }}
             >
               {text}
             </p>
@@ -136,7 +142,7 @@ export default function SobreFragments() {
         className={`
           mt-10
           transition-opacity duration-500 ease-out
-          ${isFinished ? "opacity-60" : "opacity-0 pointer-events-none"}
+          ${isMobile || isFinished ? "opacity-60" : "opacity-0 pointer-events-none"}
         `}
       >
         <button
