@@ -39,27 +39,26 @@ export default function AppShell({ children }: { children: ReactNode }) {
           : "bg-[#F5F5F7] text-[#0A0A0A]"
       }`}
     >
-
-{/* LANGUAGE SWITCHER — HOME */}
-{isHome && (
-  <div className="absolute top-6 left-6 z-50 hidden md:flex">
-    <LanguageSwitcher />
-  </div>
-)}
+      {/* LANGUAGE SWITCHER — HOME (DESKTOP ONLY) */}
+      {isHome && (
+        <div className="absolute top-6 left-6 z-50 hidden md:flex">
+          <LanguageSwitcher />
+        </div>
+      )}
 
       {/* TOGGLE DARKMODE */}
-      <div className="absolute top-6 right-6 z-50">
+      <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50">
         <button
           onClick={() => {
             const next = isDark ? "light" : "dark";
             setTheme(next);
             localStorage.setItem("theme", next);
           }}
-          className="relative w-14 h-8 rounded-full bg-black/10 dark:bg-white/10"
+          className="relative w-12 h-7 md:w-14 md:h-8 rounded-full bg-black/10 dark:bg-white/10"
         >
           <span
-            className={`absolute top-1 left-1 w-6 h-6 rounded-full transition-transform duration-300 ${
-              isDark ? "translate-x-6 bg-white" : "bg-black"
+            className={`absolute top-1 left-1 w-5 h-5 md:w-6 md:h-6 rounded-full transition-transform duration-300 ${
+              isDark ? "translate-x-5 md:translate-x-6 bg-white" : "bg-black"
             }`}
           />
         </button>
@@ -69,17 +68,22 @@ export default function AppShell({ children }: { children: ReactNode }) {
       {isHome && (
         <div
           className={`
-            absolute top-[18%] left-1/2 -translate-x-1/2 z-10 select-none
+            absolute
+            top-[12%] md:top-[18%]
+            left-1/2 -translate-x-1/2
+            z-10 select-none
             transition-all duration-[1200ms]
             [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]
-            ${
-              logoVisible
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-[0.96]"
-            }
+            ${logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}
           `}
         >
-          <LogoMark className="h-28 w-28 text-black/60 dark:text-white/60" />
+          <LogoMark
+            className="
+              h-20 w-20
+              md:h-28 md:w-28
+              text-black/60 dark:text-white/60
+            "
+          />
         </div>
       )}
 
@@ -87,7 +91,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       {!isHome && (
         <header className="flex items-center px-6 py-5">
           <Link href="/" className="opacity-80 hover:opacity-100 transition">
-            <LogoMark className="h-10 w-10 text-black/55 dark:text-white/55 transition-opacity hover:opacity-80" />
+            <LogoMark className="h-9 w-9 text-black/55 dark:text-white/55" />
           </Link>
         </header>
       )}
@@ -95,7 +99,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       {/* CONTEÚDO */}
       <main
         className={`flex-1 flex items-center justify-center px-6 ${
-          isHome ? "mt-32" : ""
+          isHome ? "mt-24 md:mt-32" : ""
         }`}
       >
         {children}

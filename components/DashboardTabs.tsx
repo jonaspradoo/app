@@ -30,12 +30,9 @@ export default function DashboardTabs() {
   const [isLeaving, setIsLeaving] = useState(false);
   const [isFading, setIsFading] = useState(false);
 
-  // 🔹 fade elegante na troca de idioma
   useEffect(() => {
     setIsFading(true);
-    const t = setTimeout(() => {
-      setIsFading(false);
-    }, 420); // duração mais longa e perceptível
+    const t = setTimeout(() => setIsFading(false), 420);
     return () => clearTimeout(t);
   }, [language]);
 
@@ -53,12 +50,11 @@ export default function DashboardTabs() {
   return (
     <div
       className={`
-        flex flex-col gap-7
-        w-full max-w-[260px]
+        flex flex-col
+        gap-5 md:gap-7
+        w-full max-w-[240px] md:max-w-[260px]
         text-center
-        transition-opacity
-        duration-[420ms]
-        ease-out
+        transition-opacity duration-[420ms] ease-out
         ${isFading ? "opacity-60" : "opacity-100"}
         ${isLeaving ? "opacity-40" : ""}
       `}
@@ -75,7 +71,8 @@ export default function DashboardTabs() {
             onMouseLeave={() => setPressedIndex(null)}
             onClick={() => handleNavigate(item.route, index)}
             className={`
-              text-4xl tracking-tight soft-text
+              text-3xl md:text-4xl
+              tracking-tight soft-text
               transition-opacity duration-200
               ${isActive ? "font-medium opacity-100" : "font-light opacity-70"}
               ${isPressed ? "opacity-60" : ""}
