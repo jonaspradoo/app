@@ -1,0 +1,10 @@
+# Next.js
+.next/
+node_modules/
+
+# Logs / binários estranhos
+npm
+nextjs-tri@1.0.0
+
+# Sistema
+.DS_Store
