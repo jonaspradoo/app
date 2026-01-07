@@ -64,12 +64,12 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </button>
       </div>
 
-      {/* LOGO — HOME */}
+      {/* LOGO — HOME (DESKTOP ONLY) */}
       {isHome && (
         <div
           className={`
-            absolute
-            top-[12%] md:top-[18%]
+            hidden md:block
+            absolute top-[18%]
             left-1/2 -translate-x-1/2
             z-10 select-none
             transition-all duration-[1200ms]
@@ -77,13 +77,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
             ${logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}
           `}
         >
-          <LogoMark
-            className="
-              h-20 w-20
-              md:h-28 md:w-28
-              text-black/60 dark:text-white/60
-            "
-          />
+          <LogoMark className="h-28 w-28 text-black/60 dark:text-white/60" />
         </div>
       )}
 
@@ -102,7 +96,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           flex-1 px-6
           ${
             isHome
-              ? "flex items-center justify-center mt-24 md:mt-32"
+              ? "flex flex-col items-center pt-28 md:pt-0 md:items-center md:justify-center"
               : "md:flex md:items-center md:justify-center"
           }
         `}
