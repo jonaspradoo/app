@@ -64,7 +64,14 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </button>
       </div>
 
-      {/* LOGO — HOME (DESKTOP ONLY) */}
+      {/* LOGO — HOME (MOBILE: NO FLUXO) */}
+      {isHome && (
+        <div className="md:hidden flex justify-center pt-8">
+          <LogoMark className="h-20 w-20 text-black/60 dark:text-white/60" />
+        </div>
+      )}
+
+      {/* LOGO — HOME (DESKTOP: ABSOLUTA) */}
       {isHome && (
         <div
           className={`
@@ -96,7 +103,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           flex-1 px-6
           ${
             isHome
-              ? "flex flex-col items-center pt-28 md:pt-0 md:items-center md:justify-center"
+              ? "flex flex-col items-center pt-24 md:pt-0 md:items-center md:justify-center"
               : "md:flex md:items-center md:justify-center"
           }
         `}
