@@ -17,7 +17,8 @@ export default function Page() {
           -top-12
         "
       >
-        <div className="mt-2 mb-12 relative -top-12">
+        {/* FOTO */}
+        <div className="mt-6 mb-12 relative">
           <SobreHero />
         </div>
 

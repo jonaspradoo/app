@@ -12,7 +12,6 @@ export default function SobreFragments() {
 
   const [offset, setOffset] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-  const [showMobileEnd, setShowMobileEnd] = useState(false);
 
   const velocityRef = useRef(0);
   const finishTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -94,19 +93,6 @@ export default function SobreFragments() {
     };
   }, [isMobile]);
 
-  /* =========================
-     DELAY DO BOTÃO — MOBILE
-     ========================= */
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const t = setTimeout(() => {
-      setShowMobileEnd(true);
-    }, 800);
-
-    return () => clearTimeout(t);
-  }, [isMobile]);
-
   return (
     <div className="w-full flex flex-col items-center">
       {/* ÁREA DE LEITURA */}
@@ -154,9 +140,7 @@ export default function SobreFragments() {
         className={`
           mt-8
           transition-opacity duration-500 ease-out
-          ${isFinished || showMobileEnd
-            ? "opacity-60"
-            : "opacity-0 pointer-events-none"}
+          ${isFinished || isMobile ? "opacity-60" : "opacity-0 pointer-events-none"}
         `}
       >
         <button

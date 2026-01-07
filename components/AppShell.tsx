@@ -98,9 +98,14 @@ export default function AppShell({ children }: { children: ReactNode }) {
 
       {/* CONTEÚDO */}
       <main
-        className={`flex-1 flex items-center justify-center px-6 ${
-          isHome ? "mt-24 md:mt-32" : ""
-        }`}
+        className={`
+          flex-1 px-6
+          ${
+            isHome
+              ? "flex items-center justify-center mt-24 md:mt-32"
+              : "flex justify-start"
+          }
+        `}
       >
         {children}
       </main>
