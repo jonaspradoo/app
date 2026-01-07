@@ -12,6 +12,7 @@ export default function SobreFragments() {
 
   const [offset, setOffset] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [showMobileEnd, setShowMobileEnd] = useState(false);
 
   const velocityRef = useRef(0);
   const finishTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -23,6 +24,19 @@ export default function SobreFragments() {
   const isMobile =
     typeof window !== "undefined" &&
     window.matchMedia("(max-width: 767px)").matches;
+
+  /* =========================
+     DELAY MOBILE (800ms)
+     ========================= */
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const t = setTimeout(() => {
+      setShowMobileEnd(true);
+    }, 800);
+
+    return () => clearTimeout(t);
+  }, [isMobile]);
 
   /* =========================
      SCROLL ARTIFICIAL — DESKTOP
@@ -95,16 +109,14 @@ export default function SobreFragments() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      {/* ÁREA DE LEITURA */}
+      {/* TEXTO */}
       <div
         ref={containerRef}
-        className={`
-          relative w-full text-center
-          ${isMobile ? "overflow-y-auto" : "overflow-hidden"}
-        `}
+        className={`relative w-full text-center ${
+          isMobile ? "overflow-visible" : "overflow-hidden"
+        }`}
         style={{
-          maxHeight: isMobile ? "58vh" : "15.5rem",
-          WebkitOverflowScrolling: "touch",
+          maxHeight: isMobile ? "none" : "15.5rem",
           maskImage:
             "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
           WebkitMaskImage:
@@ -140,7 +152,15 @@ export default function SobreFragments() {
         className={`
           mt-8
           transition-opacity duration-500 ease-out
-          ${isFinished || isMobile ? "opacity-60" : "opacity-0 pointer-events-none"}
+          ${
+            isMobile
+              ? showMobileEnd
+                ? "opacity-60"
+                : "opacity-0 pointer-events-none"
+              : isFinished
+              ? "opacity-60"
+              : "opacity-0 pointer-events-none"
+          }
         `}
       >
         <button
