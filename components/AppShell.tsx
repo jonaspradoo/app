@@ -2,9 +2,13 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import LogoMark from "@/components/logo/LogoMark";
 
 export default function AppShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
 
@@ -17,6 +21,11 @@ export default function AppShell({ children }: { children: ReactNode }) {
   if (!mounted) return null;
 
   const isDark = theme === "dark";
+
+  /* 👉 HOME NÃO USA APPSHELL */
+  if (isHome) {
+    return <>{children}</>;
+  }
 
   return (
     <div
@@ -38,7 +47,9 @@ export default function AppShell({ children }: { children: ReactNode }) {
         >
           <span
             className={`absolute top-1 left-1 w-5 h-5 md:w-6 md:h-6 rounded-full transition-transform duration-300 ${
-              isDark ? "translate-x-5 md:translate-x-6 bg-white" : "bg-black"
+              isDark
+                ? "translate-x-5 md:translate-x-6 bg-white"
+                : "bg-black"
             }`}
           />
         </button>
@@ -51,7 +62,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </Link>
       </header>
 
-      {/* CONTEÚDO */}
+      {/* CONTEÚDO — DESKTOP E INTERNAS */}
       <main className="flex-1 px-6 md:flex md:items-center md:justify-center">
         {children}
       </main>
