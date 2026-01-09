@@ -31,7 +31,7 @@ export default function HomeLayout({
   return (
     <LanguageProvider>
       <div
-        className={`min-h-screen relative flex flex-col transition-colors duration-300 ${
+       className={`relative flex flex-col transition-colors duration-300 md:min-h-screen ${
           isDark
             ? "dark bg-[#0F0F12] text-[#EDEDED]"
             : "bg-[#F5F5F7] text-[#0A0A0A]"
