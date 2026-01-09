@@ -37,10 +37,7 @@ export default function HomeLayout({
             : "bg-[#F5F5F7] text-[#0A0A0A]"
         }`}
       >
-        {/* DEBUG MOBILE — SE APARECER, É A HOME MOBILE */}
-      <div className="md:hidden fixed bottom-4 left-4 z-[9999] bg-red-600 text-white px-3 py-2 text-sm rounded">
-        MOBILE HOME ATIVA
-      </div>  
+
         
         {/* LANGUAGE SWITCHER — DESKTOP */}
         <div className="absolute top-6 left-6 z-50 hidden md:flex">
@@ -98,7 +95,7 @@ export default function HomeLayout({
         </main>
 
         {/* FOOTER */}
-        <footer className="mt-auto pb-8 pt-6 flex justify-center">
+        <footer className="pb-8 pt-6 flex justify-center md:mt-auto">
           <div className="text-center">
             <p className="text-sm opacity-50">
               Jonas Prado · Psicoterapeuta
