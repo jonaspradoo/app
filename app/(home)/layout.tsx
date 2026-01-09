@@ -37,6 +37,11 @@ export default function HomeLayout({
             : "bg-[#F5F5F7] text-[#0A0A0A]"
         }`}
       >
+        {/* DEBUG MOBILE — SE APARECER, É A HOME MOBILE */}
+      <div className="md:hidden fixed bottom-4 left-4 z-[9999] bg-red-600 text-white px-3 py-2 text-sm rounded">
+        MOBILE HOME ATIVA
+      </div>  
+        
         {/* LANGUAGE SWITCHER — DESKTOP */}
         <div className="absolute top-6 left-6 z-50 hidden md:flex">
           <LanguageSwitcher />
