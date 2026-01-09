@@ -65,20 +65,30 @@ export default function HomeLayout({
         {/* LOGO */}
         <div
           className={`
-            pt-16 md:pt-0
-            md:absolute md:top-[18%] md:left-1/2 md:-translate-x-1/2
+            pt-14 md:pt-0
             flex justify-center
+            md:absolute md:top-[18%] md:left-1/2 md:-translate-x-1/2
             transition-opacity transition-transform
             duration-[5000ms]
             [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]
             ${logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}
           `}
         >
-          <LogoMark className="h-20 w-20 md:h-28 md:w-28 text-black/60 dark:text-white/60" />
+          <LogoMark className="h-18 w-18 md:h-28 md:w-28 text-black/60 dark:text-white/60" />
         </div>
 
         {/* CONTEÚDO */}
-        <main className="px-6 mt-10 md:mt-0 md:flex-1 md:flex md:items-center md:justify-center md:pt-[260px]">
+        <main
+          className="
+            px-6
+            pt-12
+            md:pt-[260px]
+            md:flex-1
+            md:flex
+            md:items-center
+            md:justify-center
+          "
+        >
           {children}
         </main>
 
