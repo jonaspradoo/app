@@ -73,9 +73,10 @@ export default function DashboardTabs() {
             className={`
               text-3xl md:text-4xl
               tracking-tight soft-text
-              transition-opacity duration-200
-              ${isActive ? "font-medium opacity-100" : "font-light opacity-70"}
-              ${isPressed ? "opacity-60" : ""}
+              font-light
+              transition-all duration-500 ease-out
+              ${isActive ? "opacity-100" : "opacity-60"}
+              ${isPressed ? "opacity-50" : ""}
             `}
           >
             {item.label}
