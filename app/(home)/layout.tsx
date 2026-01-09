@@ -20,7 +20,6 @@ export default function HomeLayout({
     if (saved) setTheme(saved);
     setMounted(true);
 
-    // animação discreta do logo (não afeta layout)
     const t = setTimeout(() => setLogoVisible(true), 80);
     return () => clearTimeout(t);
   }, []);
@@ -55,16 +54,18 @@ export default function HomeLayout({
           >
             <span
               className={`absolute top-1 left-1 w-5 h-5 md:w-6 md:h-6 rounded-full transition-transform duration-300 ${
-                isDark ? "translate-x-5 md:translate-x-6 bg-white" : "bg-black"
+                isDark
+                  ? "translate-x-5 md:translate-x-6 bg-white"
+                  : "bg-black"
               }`}
             />
           </button>
         </div>
 
-        {/* LOGO (animação sem impacto estrutural) */}
+        {/* LOGO */}
         <div
           className={`
-            pt-20 md:pt-0
+            pt-16 md:pt-0
             md:absolute md:top-[18%] md:left-1/2 md:-translate-x-1/2
             flex justify-center
             transition-opacity transition-transform
@@ -76,13 +77,13 @@ export default function HomeLayout({
           <LogoMark className="h-20 w-20 md:h-28 md:w-28 text-black/60 dark:text-white/60" />
         </div>
 
-        {/* CONTEÚDO — NÃO ALTERADO */}
-        <main className="flex-1 flex items-center justify-center px-6 md:pt-[260px]">
+        {/* CONTEÚDO */}
+        <main className="px-6 mt-10 md:mt-0 md:flex-1 md:flex md:items-center md:justify-center md:pt-[260px]">
           {children}
         </main>
 
         {/* FOOTER */}
-        <footer className="pb-8 pt-4 flex justify-center">
+        <footer className="mt-auto pb-8 pt-6 flex justify-center">
           <div className="text-center">
             <p className="text-sm opacity-50">
               Jonas Prado · Psicoterapeuta
