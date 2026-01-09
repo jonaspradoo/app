@@ -54,6 +54,12 @@ export default function DashboardTabs() {
         gap-5 md:gap-7
         w-full max-w-[240px] md:max-w-[260px]
         text-center
+
+        /* 👇 CHAVE DA CORREÇÃO */
+        pt-4 md:pt-0
+        items-center
+        justify-start
+
         transition-opacity duration-[420ms] ease-out
         ${isFading ? "opacity-60" : "opacity-100"}
         ${isLeaving ? "opacity-40" : ""}
